@@ -92,4 +92,41 @@ const getFollowing = async (req, res) => {
   }
 };
 
-module.exports = { follow, getFollowers, getFollowing };
+const getNumFollowers = async (req, res) => {
+  try {
+    const numFollowers = await Followers.find({ user: req.params.id }).count();
+    if (numFollowers !== null) {
+      return res.status(200).send({
+        numFollowers,
+      });
+    }
+  } catch (err) {
+    return res.status(500).send({
+      message: 'Internal server error',
+      err: err.message,
+    });
+  }
+};
+
+const getNumFollowing = async (req, res) => {
+  try {
+    const numFollowers = await Following.find({ user: req.params.id }).count();
+    if (numFollowers !== null) {
+      return res.status(200).send({
+        numFollowers,
+      });
+    }
+  } catch (err) {
+    return res.status(500).send({
+      message: 'Internal server error',
+      err: err.message,
+    });
+  }
+};
+module.exports = {
+  follow,
+  getFollowers,
+  getFollowing,
+  getNumFollowers,
+  getNumFollowing,
+};
