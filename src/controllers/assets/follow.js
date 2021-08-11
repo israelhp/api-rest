@@ -4,7 +4,8 @@
 
 require('../../models/User');
 const Followers = require('../../models/Followers'),
-  Following = require('../../models/Following');
+  Following = require('../../models/Following'),
+  { incrementFollowProfile } = require('./followProfile');
 
 const follow = async (req, res) => {
   try {
@@ -36,9 +37,9 @@ const follow = async (req, res) => {
     const following = new Following({
       ...dFollowing,
     });
-    following.save();
-    follower.save();
-
+    await following.save();
+    await follower.save();
+    await incrementFollowProfile(req.user._id, req.body.userFollowing._id);
     return res.status(200).send({
       message: 'Follow successful',
       complete: true,
@@ -123,10 +124,37 @@ const getNumFollowing = async (req, res) => {
     });
   }
 };
+
+const getNumFollowingObj = async req => {
+  try {
+    const numFollowing = await Following.find({ user: req.user._id }).count();
+    if (numFollowing !== null) {
+      return numFollowing;
+    }
+  } catch (err) {
+    return 0;
+  }
+  return 0;
+};
+
+const getNumFollowersObj = async req => {
+  try {
+    const numFollowers = await Followers.find({ user: req.user._id }).count();
+    if (numFollowers !== null) {
+      return numFollowers;
+    }
+  } catch (err) {
+    return 0;
+  }
+  return 0;
+};
+
 module.exports = {
   follow,
   getFollowers,
   getFollowing,
   getNumFollowers,
   getNumFollowing,
+  getNumFollowingObj,
+  getNumFollowersObj,
 };

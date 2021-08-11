@@ -1,5 +1,6 @@
 const Followers = require('../../models/Followers'),
-  Following = require('../../models/Following');
+  Following = require('../../models/Following'),
+  { incrementUnFollowProfile } = require('./followProfile');
 
 const unfollow = async (req, res) => {
   try {
@@ -14,6 +15,7 @@ const unfollow = async (req, res) => {
 
     const deleteFollower = await Followers.deleteOne(dFollower);
     const deleteFollowing = await Following.deleteOne(dFollowing);
+    await incrementUnFollowProfile(req.user._id, req.body.userUnFollowing._id);
 
     return res.status(500).send({
       message: 'Successful unfollow',
