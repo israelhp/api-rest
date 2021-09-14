@@ -10,8 +10,8 @@ const storage = multer.diskStorage({
     if (file.fieldname === 'imgHeader') {
       cb(null, path.resolve('uploads/header'));
     }
-    if (file.fieldname === 'imgPost') {
-      cb(null, path.resolve('uploads'));
+    if (file.fieldname === 'imgsPost') {
+      cb(null, path.resolve('uploads/post'));
     }
   },
   filename(req, file, cb) {

@@ -3,7 +3,6 @@ const mongoose = require('mongoose'),
   { createImage, defaultImgProfile, defaultImgHeader } = require('./image'),
   follow = require('./follow');
 
-// TODO: Agregar Perfil inicial en caso no suba fotos. y agregar en caso si sube
 const initProfile = async (req, res) => {
   let idImgProfile, idImgHeader;
   try {

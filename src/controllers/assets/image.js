@@ -2,11 +2,21 @@ const path = require('path'),
   Image = require('../../models/Image');
 
 const createImage = async (user, file, type) => {
-  const aux = {
-    user: user._id,
-    path: file[0].path,
-    typeImage: type,
-  };
+  let aux;
+  if (file[0]) {
+    aux = {
+      user: user._id,
+      path: file[0].path,
+      typeImage: type,
+    };
+  } else {
+    aux = {
+      user: user._id,
+      path: file.path,
+      typeImage: type,
+    };
+  }
+
   try {
     const image = new Image(aux);
     const save = await image.save();
