@@ -5,13 +5,13 @@ const multer = require('multer'),
 const storage = multer.diskStorage({
   destination(req, file, cb) {
     if (file.fieldname === 'imgProfile') {
-      cb(null, path.resolve('uploads/profile'));
+      cb(null, 'uploads/profile');
     }
     if (file.fieldname === 'imgHeader') {
-      cb(null, path.resolve('uploads/header'));
+      cb(null, 'uploads/header');
     }
     if (file.fieldname === 'imgsPost') {
-      cb(null, path.resolve('uploads/post'));
+      cb(null, 'uploads/post');
     }
   },
   filename(req, file, cb) {
