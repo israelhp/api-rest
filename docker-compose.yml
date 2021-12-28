@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  api:
+    container_name: api_social
+    build: .
+    ports:
+      - '3000:3000'
+    links:
+      - db
+    volumes:
+      - .:/usr/src/app
+    environment:
+      - PORT=3000
+      - MONGO_URL=mongodb://db/api-rest
+      - JWT_KEY=shhhhh
+
+  db:
+    container_name: db_social
+    image: mongo
+    ports:
+      - '27017:27017'
+    volumes:
+      - /data/db
+    logging:
+      driver: none
