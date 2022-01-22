@@ -14,6 +14,9 @@ services:
       - PORT=3000
       - MONGO_URL=mongodb://db/api-rest
       - JWT_KEY=shhhhh
+      - URL_RESET_PASSWORD=http://192.168.0.9:3001/reset/password/form
+      - SEND_EMAIL=elphillips11@gmail.com
+      - PASS_EMAIL=josue24320281
 
   db:
     container_name: db_social
