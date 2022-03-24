@@ -4,7 +4,7 @@ const cors = require('cors'),
   express = require('express'),
   app = express(),
   router = require('./routes/router');
-
+var a = 10
 app.set('port', process.env.PORT);
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
