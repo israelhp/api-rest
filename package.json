@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node ./src",
     "dev": "nodemon ./src",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
   },
   "author": "israelhurtarte@gmail.com",
   "license": "MIT",
@@ -33,7 +34,8 @@
       "eslint --fix",
       "jest --findRelatedTests",
       "git add"
-    ]
+    ],
+    "*.js": "eslint --cache --fix"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
