@@ -10,6 +10,7 @@ router.post('/logout', authenticate, userController.logout);
 router.post('/logoutall', authenticate, userController.logoutall);
 router.post('/reset', userController.sendUrlResetPassword);
 router.post('/reset/validate', userController.validateReset);
+router.get('/auth/image/profile', authenticate, userController.getImgProfile);
 router.get('/', async (req, res) => {
   await res.status(200).send({
     message: 'users',
